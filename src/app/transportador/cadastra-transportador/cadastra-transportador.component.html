@@ -1,0 +1,114 @@
+<div clas="row">
+    <div class="col-12">
+      <h6>{{editando ? 'Edição' : 'Novo'}} transportador</h6>
+    </div>
+</div>
+
+<form #f="ngForm" (ngSubmit)="salvar(f)" (autocomplete)="off">
+
+  <div class="row">
+    <div class="col-12  col-sm-6">
+      <div class="form-group">
+        <label class="control-label" for="nome">Nome</label>
+        <input type="text" class="form-control" name="nome" id="nome" [(ngModel)]="transportador.nome" autofocus required>
+      </div>
+    </div>
+
+    <div class="col-12  col-sm-6">
+      <div class="form-group">
+        <label class="control-label" for="email">Email</label>
+        <input type="text" class="form-control" name="email" id="email" [(ngModel)]="transportador.email" required email>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-12  col-md-4  col-sm-4">
+      <div class="form-group">
+        <label class="control-label" for="telefone">Telefone</label>
+        <input type="text" rInputMask="99 9999-9999"class="form-control" name="telefone" id="telefone" [(ngModel)]="transportador.contato.telefone" required>
+      </div>
+    </div>
+
+    <div class="col-12  col-md-4  col-sm-4">
+      <div class="form-group">
+        <label class="control-label" for="celular">Celular</label>
+        <input type="text" rInputMask="99 99999-9999" class="form-control" name="celular" id="celular" [(ngModel)]="transportador.contato.celular" required>
+      </div>
+    </div>
+
+    <div class="col-12  col-md-4  col-sm-4">
+      <div class="form-group">
+        <label class="control-label" for="whatsapp">Whatsapp</label>
+        <input type="text" rInputMask="99 9999-9999" class="form-control" name="whatsapp" id="whatsapp" [(ngModel)]="transportador.contato.whatsapp" required>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-12  col-sm-3">
+      <div class="form-group">
+        <label class="control-label" for="modal">Modal</label>
+        <select class="form-control" name="modal" id="modal" required [(ngModel)]="transportador.modalTransporte.codigo" >
+          <option *ngFor="let modal of modalTransportes" [ngValue]="modal.codigo">{{modal.descricao}}</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="col-12  col-sm-2">
+      <div class="form-group">
+        <label class="control-label" for="cep">Cep</label>
+        <input type="text" rInputMask="99.999-999"class="form-control" name="cep" id="cep" [(ngModel)]="transportador.endereco.cep" (blur)="buscarCEP()" required>
+      </div>
+    </div>
+
+    <div class="col-12  col-sm-3">
+      <div class="form-group">
+        <label class="control-label" for="estado">Estado</label>
+        <select class="form-control" name="estado" id="estado" required [(ngModel)]="transportador.endereco.estado">
+          <option *ngFor="let estado of estados" [ngValue]="estado.sigla">{{estado.nome}}</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="col-12  col-sm-4">
+      <div class="form-group">
+        <label class="control-label" for="cidade">Cidade</label>
+        <input type="text" class="form-control" name="cidade" id="cidade" [(ngModel)]="transportador.endereco.cidade" required>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="row">
+    <div class="col-12  col-sm-4">
+      <div class="form-group">
+        <label class="control-label" for="bairro">Bairro</label>
+        <input type="text" class="form-control" name="bairro" id="bairro" [(ngModel)]="transportador.endereco.bairro" required>
+      </div>
+    </div>
+
+    <div class="col-12  col-sm-4">
+      <div class="form-group">
+        <label class="control-label" for="endereco">Endereço</label>
+        <input type="text" class="form-control" name="endereco" id="endereco" [(ngModel)]="transportador.endereco.endereco" required>
+      </div>
+    </div>
+
+    <div class="col-12  col-sm-3">
+      <div class="form-group">
+        <label class="control-label" for="numero">Número</label>
+        <input type="text" class="form-control" name="numero" id="numero" required>
+      </div>
+    </div>
+  </div>
+
+  <div class="row  text-right">
+    <div class="col-12">
+      <a href="#" class="btn  btn-outline-primary  mr-2">Voltar</a>
+      <button class="btn  btn-danger  mr-2" [hidden]="editando ? '' : 'hidden'">Excluir</button>
+      <input type="submit" class="btn  btn-primary" value="Cadastrar" [disabled]="f.invalid">
+    </div>
+  </div>
+
+</form>

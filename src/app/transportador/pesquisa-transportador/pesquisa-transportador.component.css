@@ -1,0 +1,65 @@
+.page-header {
+  background: #efefef;
+}
+
+.card-transportador {
+  height: 105px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+}
+
+.card-transportador::after {
+  clear: both;
+}
+
+.card-transportador__foto {
+  height: 90px;
+  margin: 5px 5px;
+}
+
+.card-transportador__title {
+  font-size: 1.25em;
+}
+
+.card-transportador__title--link {
+  text-decoration: none;
+  font-weight: bold;
+
+  color: #bbb;
+}
+
+.card-transportador__title--link:hover {
+  color: #b6b5b5;
+}
+
+.card-transportador__coluna {
+  width: 150px;
+  float: left;
+}
+
+.card-transportador__coluna--dados-empresa-nome {
+  width: 350px;
+  margin: 20px 0px 20px 50px;
+}
+
+.card-transportador__coluna-dados-empresa-contato {
+  width: 250px;
+  margin: 20px 0px;
+
+  color: #bbb;
+}
+
+.card-transportador__coluna-dados-empresa-whatsapp {
+  width: 250px;
+  margin: 10px 0px;
+  color: #363535;
+}
+
+.card-transportador__coluna-dados-empresa-whatsapp-link {
+  text-decoration: none;
+  color: #313131;
+}
+
+.card-transportador__coluna-dados-empresa-whatsapp-link:hover {
+  color: #343434;
+}
