@@ -29,6 +29,10 @@ export class TransportadorService {
       params = params.set('estado', filtro.estado);
     }
 
+    if (filtro.modal) {
+      params = params.set('modal', filtro.modal.toString());
+    }
+
     return this.http.get(`${this.transportadorUrl}`, { params }).toPromise()
             .then(response => {
               return response;

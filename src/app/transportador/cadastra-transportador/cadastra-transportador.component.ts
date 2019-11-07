@@ -7,7 +7,7 @@ import { ToastyService } from 'ng2-toasty';
 import { Transportador } from '../../core/modelo';
 import { ViaCepService } from '../../core/via-cep.service';
 import { EstadoService } from '../../core/estado.service';
-import { ModalTransporteService } from '../../modal-transporte/moda-transporte.service';
+import { ModalTransporteService } from '../../modal-transporte/modal-transporte.service';
 import { TransportadorService } from '../transportador.service';
 import { ErroHandlerService } from './../../core/errohandler.service';
 import { Title } from '@angular/platform-browser';

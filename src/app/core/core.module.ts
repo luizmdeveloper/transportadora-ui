@@ -13,7 +13,7 @@ import { TransportadorService } from '../transportador/transportador.service';
 import { ErroHandlerService } from './errohandler.service';
 import { ViaCepService } from './via-cep.service';
 import { EstadoService } from './estado.service';
-import { ModalTransporteService } from '../modal-transporte/moda-transporte.service';
+import { ModalTransporteService } from '../modal-transporte/modal-transporte.service';
 
 @NgModule({
   declarations: [],

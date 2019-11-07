@@ -12,7 +12,7 @@
 </div>
 <form (ngSubmit)="buscar()" (autocomplete)="off">
   <div class="row  mt-3">
-      <div class="col-6">
+      <div class="col-3">
         <div class="form-group">
           <label class="control-label" for="estado">Estado</label>
           <select class="form-control" id="estado" name="estado" [(ngModel)]="filtro.estado">
@@ -24,6 +24,14 @@
         <div class="form-group">
           <label class="control-label" for="cidade">Cidade</label>
           <input type="text" class="form-control" id="cidade" name="cidade" [(ngModel)]="filtro.cidade">
+        </div>
+      </div>
+      <div class="col-3">
+        <div class="form-group">
+          <label class="control-label" for="modal">Modal</label>
+          <select class="form-control" id="modal" name="modal" [(ngModel)]="filtro.modal">
+            <option *ngFor="let modal of modais" [ngValue]="modal.codigo">{{modal.nome}}</option>
+          </select>
         </div>
       </div>
     </div>
@@ -53,11 +61,11 @@
       <p class="card-transportador__title"><a [routerLink]="['/transportadores, transportador.codigo']" class="card-transportador__title--link">{{transportador.nome}}</a></p>
     </div>
     <div class="card-transportador__coluna  card-transportador__coluna-dados-empresa-contato">
-      <p>{{transportador.telefone}} {{transportador.celular}}</p>
+      <p>{{transportador.contato.telefone}} {{transportador.contato.celular}}</p>
       <p>{{transportador.email}}</p>
     </div>
     <div class="card-transportador__coluna  card-transportador__coluna-dados-empresa-whatsapp">
-      <p >fale agora conosco <a href="#" class="card-transportador__coluna-dados-empresa-whatsapp-link"target="_blank">8788416661</a></p>
+      <p>fale agora conosco <a href="#" class="card-transportador__coluna-dados-empresa-whatsapp-link"target="_blank">{{transportador.contato.whatsapp}}</a></p>
     </div>
   </div>
 </div>
