@@ -19,8 +19,8 @@ import { Title } from '@angular/platform-browser';
 })
 export class CadastraTransportadorComponent implements OnInit {
 
-  private estados = [ {sigla: '', nome: 'Selecione um estado'} ];
-  private modalTransportes = [ {codigo: 0, descricao: 'Selecione o modal'} ];
+  private estados = [{sigla: '', descricao: 'Selecione um estado'}];
+  private modalTransportes = [{codigo: 0, nome: 'Selecione um modal'}];
   private transportador: Transportador;
 
   constructor(private viaCEPService: ViaCepService,
@@ -92,8 +92,10 @@ export class CadastraTransportadorComponent implements OnInit {
 
   buscarTodosModais() {
     this.modalTransporteService.buscarTodos()
-      .then(modal => {
-        this.modalTransportes.push(modal);
+      .then(resultado => {
+        resultado.forEach(modal => {
+          this.modalTransportes.push(modal);
+        });
       })
       .catch(erro => this.erroHandlerService.handler(erro));
   }

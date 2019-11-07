@@ -1,10 +1,10 @@
 <div clas="row">
     <div class="col-12">
-      <h6>{{editando ? 'Edição' : 'Novo'}} transportador</h6>
+      <h1>{{editando ? 'Edição' : 'Novo'}} transportador</h1>
     </div>
 </div>
 
-<form #f="ngForm" (ngSubmit)="salvar(f)" (autocomplete)="off">
+<form #f="ngForm" (ngSubmit)="salvar(f)" autocomplete="off">
 
   <div class="row">
     <div class="col-12  col-sm-6">
@@ -50,7 +50,7 @@
       <div class="form-group">
         <label class="control-label" for="modal">Modal</label>
         <select class="form-control" name="modal" id="modal" required [(ngModel)]="transportador.modalTransporte.codigo" >
-          <option *ngFor="let modal of modalTransportes" [ngValue]="modal.codigo">{{modal.descricao}}</option>
+          <option *ngFor="let modal of modalTransportes" [ngValue]="modal.codigo">{{modal.nome}}</option>
         </select>
       </div>
     </div>
@@ -66,7 +66,7 @@
       <div class="form-group">
         <label class="control-label" for="estado">Estado</label>
         <select class="form-control" name="estado" id="estado" required [(ngModel)]="transportador.endereco.estado">
-          <option *ngFor="let estado of estados" [ngValue]="estado.sigla">{{estado.nome}}</option>
+          <option *ngFor="let estado of estados" [ngValue]="estado.sigla">{{estado.descricao}}</option>
         </select>
       </div>
     </div>
@@ -107,7 +107,7 @@
     <div class="col-12">
       <a routerLink="/transportadores" class="btn  btn-outline-primary  mr-2">Voltar</a>
       <button class="btn  btn-danger  mr-2" [hidden]="editando ? '' : 'hidden'">Excluir</button>
-      <input type="submit" class="btn  btn-primary" value="Cadastrar" >
+      <input type="submit" class="btn  btn-primary" value="Cadastrar" [disabled]="f.invalid">
     </div>
   </div>
 
