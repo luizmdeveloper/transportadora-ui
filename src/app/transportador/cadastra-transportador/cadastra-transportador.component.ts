@@ -107,4 +107,12 @@ export class CadastraTransportadorComponent implements OnInit {
       })
       .catch(erro => this.erroHandlerService.handler(erro));
   }
+
+  excluir(form: FormControl, codigo: number) {
+    this.transportadorService.exlcuir(codigo).then(() => {
+      this.toasty.success('Transportadora salva com sucesso');
+      this.transportador = new Transportador();
+      form.reset();
+    })
+  }
 }

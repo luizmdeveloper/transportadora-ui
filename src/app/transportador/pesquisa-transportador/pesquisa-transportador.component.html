@@ -58,7 +58,7 @@
       <img src="../../../assets/images/mock-images.png" class="img-thumbnail  card-transportador__foto" />
     </div>
     <div class="card-transportador__coluna  card-transportador__coluna--dados-empresa-nome">
-      <p class="card-transportador__title"><a [routerLink]="['/transportadores, transportador.codigo']" class="card-transportador__title--link">{{transportador.nome}}</a></p>
+      <p class="card-transportador__title"><a [routerLink]="['/transportadores', transportador.codigo]" class="card-transportador__title--link">{{transportador.nome}}</a></p>
     </div>
     <div class="card-transportador__coluna  card-transportador__coluna-dados-empresa-contato">
       <p>{{transportador.contato.telefone}} {{transportador.contato.celular}}</p>
