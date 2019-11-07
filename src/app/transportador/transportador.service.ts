@@ -40,6 +40,9 @@ export class TransportadorService {
   }
 
   public salvar(transportador: Transportador): Promise<Transportador> {
+    if (transportador.endereco.cep) {
+      transportador.endereco.cep = Number(transportador.endereco.cep.toString().replace('-','').replace('.',''));
+    }
     return this.http.post(this.transportadorUrl, transportador).toPromise()
               .then(response => {
                     return response as Transportador;
