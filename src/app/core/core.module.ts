@@ -1,5 +1,6 @@
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BrowserModule } from '@angular/platform-browser';
+import { Title } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
@@ -31,6 +32,8 @@ import { ModalTransporteService } from '../modal-transporte/moda-transporte.serv
     ToastyModule
   ],
   providers: [
+    Title,
+
     TransportadorService,
     ErroHandlerService,
     ViaCepService,

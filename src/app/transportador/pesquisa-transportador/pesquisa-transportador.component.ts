@@ -5,6 +5,7 @@ import { Component, OnInit } from '@angular/core';
 import { TransportadorFiltro } from './../../core/filtro';
 import { TransportadorService } from './../transportador.service';
 import { EstadoService } from './../../core/estado.service';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-pesquisa-transportador',
@@ -19,9 +20,11 @@ export class PesquisaTransportadorComponent implements OnInit {
 
   constructor(private estadoService: EstadoService,
               private transportadorService: TransportadorService,
-              private erroHandlerService: ErroHandlerService) { }
+              private erroHandlerService: ErroHandlerService,
+              private title: Title) { }
 
   ngOnInit() {
+    this.title.setTitle('Pesquisa de transportador');
     this.buscarTodosEstados();
     this.buscar();
   }

@@ -10,6 +10,7 @@ import { EstadoService } from '../../core/estado.service';
 import { ModalTransporteService } from '../../modal-transporte/moda-transporte.service';
 import { TransportadorService } from '../transportador.service';
 import { ErroHandlerService } from './../../core/errohandler.service';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-cadastra-transportador',
@@ -28,15 +29,19 @@ export class CadastraTransportadorComponent implements OnInit {
               private toasty: ToastyService,
               private transportadorService: TransportadorService,
               private erroHandlerService: ErroHandlerService,
-              private activatedRoute: ActivatedRoute) { }
+              private activatedRoute: ActivatedRoute,
+              private title: Title) { }
 
   ngOnInit() {
+    this.title.setTitle('Cadastro de transportador');
+
     this.transportador = new Transportador();
 
     const codigo = this.activatedRoute.snapshot.params['codigo'];
 
     if (codigo) {
       this.buscarTransportadorPorCodigo(codigo);
+      this.title.setTitle('Edição de transportador');
     }
 
     this.buscarTodosEstados();
