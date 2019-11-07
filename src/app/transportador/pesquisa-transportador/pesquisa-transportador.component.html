@@ -5,18 +5,52 @@
         <h1>Pesquisa de transportador</h1>
       </div>
       <div class="col-2">
-        <a class="btn  btn-primary" href="#">Novo</a>
+        <a class="btn  btn-primary" routerLink="/transportadores/novo">Novo</a>
       </div>
     </div>
   </div>
 </div>
+<form (ngSubmit)="buscar()" (autocomplete)="off">
+  <div class="row  mt-3">
+      <div class="col-6">
+        <div class="form-group">
+          <label class="control-label" for="estado">Estado</label>
+          <select class="form-control" id="estado" name="estado" [(ngModel)]="filtro.estado">
+            <option *ngFor="let estado of estados"  [ngValue]="estado.sigla">{{estado.descricao}}</option>
+          </select>
+        </div>
+      </div>
+      <div class="col-6">
+        <div class="form-group">
+          <label class="control-label" for="cidade">Cidade</label>
+          <input type="text" class="form-control" id="cidade" name="cidade" [(ngModel)]="filtro.cidade">
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-12">
+        <div class="form-group">
+          <label class="control-label" for="nome">Nome</label>
+          <input type="text" class="form-control" id="nome" name="nome" [(ngModel)]="filtro.nome">
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-12">
+        <input type="submit" class="btn  btn-primary" value="pesquisar">
+      </div>
+    </div>
+
+</form>
 <div class="row  mt-3">
   <div class="card-transportador  mt-2" *ngFor="let transportador of transportadores">
     <div class="card-transportador__coluna">
       <img src="../../../assets/images/mock-images.png" class="img-thumbnail  card-transportador__foto" />
     </div>
     <div class="card-transportador__coluna  card-transportador__coluna--dados-empresa-nome">
-      <p class="card-transportador__title"><a href="#" class="card-transportador__title--link">{{transportador.nome}}</a></p>
+      <p class="card-transportador__title"><a [routerLink]="['/transportadores, transportador.codigo']" class="card-transportador__title--link">{{transportador.nome}}</a></p>
     </div>
     <div class="card-transportador__coluna  card-transportador__coluna-dados-empresa-contato">
       <p>{{transportador.telefone}} {{transportador.celular}}</p>

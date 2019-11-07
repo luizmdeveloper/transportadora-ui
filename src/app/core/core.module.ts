@@ -1,10 +1,11 @@
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 
 import { ToastyModule } from 'ng2-toasty';
-import { ToastyService } from 'ng2-toasty';
 
 import { TransportadorModule } from '../transportador/transportador.module';
 import { TransportadorService } from '../transportador/transportador.service';
@@ -16,11 +17,13 @@ import { ModalTransporteService } from '../modal-transporte/moda-transporte.serv
 @NgModule({
   declarations: [],
   imports: [
+    BrowserModule,
+    BrowserAnimationsModule,
     CommonModule,
     HttpClientModule,
     RouterModule,
 
-    ToastyModule,
+    ToastyModule.forRoot(),
 
     TransportadorModule,
   ],
@@ -32,9 +35,7 @@ import { ModalTransporteService } from '../modal-transporte/moda-transporte.serv
     ErroHandlerService,
     ViaCepService,
     EstadoService,
-    ModalTransporteService,
-
-    ToastyService
+    ModalTransporteService
   ]
 })
 export class CoreModule { }

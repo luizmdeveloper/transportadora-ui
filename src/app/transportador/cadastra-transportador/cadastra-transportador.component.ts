@@ -1,12 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 
 import { ToastyService } from 'ng2-toasty';
+
 import { Transportador } from '../../core/modelo';
 import { ViaCepService } from '../../core/via-cep.service';
 import { EstadoService } from '../../core/estado.service';
 import { ModalTransporteService } from '../../modal-transporte/moda-transporte.service';
 import { TransportadorService } from '../transportador.service';
+import { ErroHandlerService } from './../../core/errohandler.service';
 
 @Component({
   selector: 'app-cadastra-transportador',
@@ -23,10 +26,21 @@ export class CadastraTransportadorComponent implements OnInit {
               private estadoService: EstadoService,
               private modalTransporteService: ModalTransporteService,
               private toasty: ToastyService,
-              private transportadorService: TransportadorService) { }
+              private transportadorService: TransportadorService,
+              private erroHandlerService: ErroHandlerService,
+              private activatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
     this.transportador = new Transportador();
+
+    const codigo = this.activatedRoute.snapshot.params['codigo'];
+
+    if (codigo) {
+      this.buscarTransportadorPorCodigo(codigo);
+    }
+
+    this.buscarTodosEstados();
+    this.buscarTodosModais();
   }
 
   get editando() {
@@ -44,6 +58,46 @@ export class CadastraTransportadorComponent implements OnInit {
   }
 
   salvar(formulario: FormControl) {
-    console.log(this.transportador);
+    if (this.editando) {
+      this.transportadorService.alterar(this.transportador.codigo, this.transportador)
+        .then(resultado => {
+          this.toasty.success('Transportador salvo com sucesso');
+        })
+        .catch(erro => this.erroHandlerService.handler(erro));
+    } else {
+      this.transportadorService.salvar(this.transportador)
+        .then(resultado => {
+          this.toasty.success('Transportador salvo com sucesso');
+          formulario.reset();
+          this.transportador = new Transportador();
+        })
+        .catch(erro => this.erroHandlerService.handler(erro));
+      }
+  }
+
+  buscarTodosEstados() {
+    this.estadoService.buscarTodos()
+      .then(resultado => {
+        resultado.forEach(estado => {
+          this.estados.push(estado);
+        });
+      })
+      .catch(erro => this.erroHandlerService.handler(erro));
+  }
+
+  buscarTodosModais() {
+    this.modalTransporteService.buscarTodos()
+      .then(modal => {
+        this.modalTransportes.push(modal);
+      })
+      .catch(erro => this.erroHandlerService.handler(erro));
+  }
+
+  buscarTransportadorPorCodigo(codigo: number) {
+    this.transportadorService.buscarPorCodigo(codigo)
+      .then(resultado => {
+          this.transportador = resultado;
+      })
+      .catch(erro => this.erroHandlerService.handler(erro));
   }
 }

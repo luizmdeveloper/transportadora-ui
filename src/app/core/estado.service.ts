@@ -8,7 +8,7 @@ import { environment } from '../../environments/environment';
 })
 export class EstadoService {
 
-  private estadoURl = `${environment}/estados`;
+  private estadoURl = `${environment.baseUrl}/estados`;
 
   constructor(private http: HttpClient) { }
 

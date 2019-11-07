@@ -1,19 +1,39 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 
 import { environment } from '../../environments/environment';
 import { Transportador } from '../core/modelo';
+import { TransportadorFiltro } from '../core/filtro';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TransportadorService {
 
-  private transportadorUrl = `${environment}/transportadores`;
+  private transportadorUrl = `${environment.baseUrl}/transportadores`;
 
   constructor(private http: HttpClient) { }
 
-  public filtrar() {}
+  public buscarTodos(filtro: TransportadorFiltro): Promise<any> {
+    let params = new HttpParams();
+
+    if (filtro.cidade) {
+      params = params.set('cidade', filtro.cidade);
+    }
+
+    if (filtro.nome) {
+      params = params.set('nome', filtro.nome);
+    }
+
+    if (filtro.estado) {
+      params = params.set('estado', filtro.estado);
+    }
+
+    return this.http.get(`${this.transportadorUrl}`, { params }).toPromise()
+            .then(response => {
+              return response;
+            });
+  }
 
   public salvar(transportador: Transportador): Promise<Transportador> {
     return this.http.post(this.transportadorUrl, transportador).toPromise()

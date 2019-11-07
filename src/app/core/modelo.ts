@@ -25,4 +25,5 @@ export class Transportador {
   endereco = new Endereco();
   contato = new Contato();
   modalTransporte = new ModalTransporte();
+  foto: string;
 }

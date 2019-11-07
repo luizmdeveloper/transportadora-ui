@@ -8,7 +8,7 @@ import { environment } from '../../environments/environment';
 })
 export class ModalTransporteService {
 
-  private modalTransportesURl = `${environment}/modalTransportes`;
+  private modalTransportesURl = `${environment.baseUrl}/modalTransportes`;
 
   constructor(private http: HttpClient) { }
 

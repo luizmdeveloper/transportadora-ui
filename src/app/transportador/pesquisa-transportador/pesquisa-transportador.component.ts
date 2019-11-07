@@ -1,4 +1,10 @@
+import { ToastyService } from 'ng2-toasty';
+import { ErroHandlerService } from './../../core/errohandler.service';
 import { Component, OnInit } from '@angular/core';
+
+import { TransportadorFiltro } from './../../core/filtro';
+import { TransportadorService } from './../transportador.service';
+import { EstadoService } from './../../core/estado.service';
 
 @Component({
   selector: 'app-pesquisa-transportador',
@@ -7,37 +13,35 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PesquisaTransportadorComponent implements OnInit {
 
-  transportadores = [
-    {
-      codigo: 1,
-      nome: 'Braspress Transportes Urgentes',
-      telefone: '87 2101-9700',
-      celular: '87 98841-6661',
-      email: 'contato@braspress.com.br',
-      whatsapp: '87 98841661'
-    },
-    {
-      codigo: 2,
-      nome: 'Transzape Transportes Rodoviários Ltda',
-      telefone: '87 3863-2400',
-      celular: '87 98841-6661',
-      email: 'contato@transzapetransportes.com.br',
-      whatsapp: '87 98841661'
-    },
-    {
-      codigo: 3,
-      nome: 'E3LOG Logistica',
-      telefone: '74 3611-8520',
-      celular: '87 98841-6661',
-      email: 'entregas@e3log.com',
-      whatsapp: '87 98841-661'
-    }
+  filtro = new TransportadorFiltro();
+  estados = [{sigla: '', descricao: 'Selecione um estado' }]
+  transportadores = [];
 
-  ];
-
-  constructor() { }
+  constructor(private estadoService: EstadoService,
+              private transportadorService: TransportadorService,
+              private erroHandlerService: ErroHandlerService) { }
 
   ngOnInit() {
+    this.buscarTodosEstados();
+    this.buscar();
+  }
+
+  buscar() {
+    this.transportadorService.buscarTodos(this.filtro)
+      .then(resultado => {
+        this.transportadores = resultado;
+      })
+      .catch(erro => this.erroHandlerService.handler(erro));
+  }
+
+  buscarTodosEstados() {
+    this.estadoService.buscarTodos()
+      .then(resultado => {
+        resultado.forEach(estado => {
+          this.estados.push(estado);
+        });
+      })
+      .catch(erro => this.erroHandlerService.handler(erro));
   }
 
 }
